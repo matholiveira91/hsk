@@ -1,0 +1,3 @@
+[submodule ".huskyci"]
+	path = .huskyci
+	url = https://github.com/globocom/huskyCI.git
