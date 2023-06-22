@@ -20,6 +20,6 @@ jobs:
           docker run --rm \
             -v "$(pwd)":/src \
             -v /var/run/docker.sock:/var/run/docker.sock \
-            -e HUSKYCI_URL=<your_huskyCI_URL> \
+            -e HUSKYCI_URL=https://github.com/matholiveira91/hsk \
             -e HUSKYCI_APIKEY=<your_huskyCI_API_KEY> \
             huskyci/husky:latest
