@@ -18,7 +18,7 @@ jobs:
 
       - name: Run huskyCI
         run: |
-          HUSKYCI_CLIENT_API_USE_HTTPS=$HUSKYCI_CLIENT_API_USE_HTTPS=
+          HUSKYCI_CLIENT_API_USE_HTTPS=$HUSKYCI_CLIENT_API_USE_HTTPS
           wget $HUSKYCI_CLIENT_API_ADDR:8888/client/cmd/huskyci-client-bin
           mv huskyci-client-bin hsk_client
           chmod +x hsk_client && ./hsk_client
