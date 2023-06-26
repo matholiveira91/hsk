@@ -17,8 +17,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run huskyCI
+        env:
+          HUSKYCI_SERVER_URL: http://$HUSKYCI_CLIENT_API_ADDR:8888
         run: |
-          HUSKYCI_CLIENT_API_USE_HTTPS=$HUSKYCI_CLIENT_API_USE_HTTPS
-          wget $HUSKYCI_CLIENT_API_ADDR:8888/client/cmd/huskyci-client-bin
-          mv huskyci-client-bin hsk_client
-          chmod +x hsk_client && ./hsk_client
+          curl -X POST -H "Content-Type: application/json" -d '{ "repository": "https://github.com/matholiveira91/hsk/" }' $HUSKYCI_SERVER_URL/scan
