@@ -18,7 +18,7 @@ jobs:
 
       - name: Run huskyCI
         env:
-          HUSKY_URL: http://$HUSKYCI_CLIENT_API_ADDR:8888/analysis                      
+          HUSKY_URL: ${{http://$HUSKYCI_CLIENT_API_ADDR:8888/analysis}}                      
           
       
         run: |
