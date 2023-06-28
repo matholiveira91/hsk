@@ -23,4 +23,4 @@ jobs:
           
       
         run: |
-          curl  -H "Content-Type: application/json" -d '{"repositoryURL":"https://github.com/matholiveira91/hsk.git","repositoryBranch":"main"}' "$env.HUSKY_URL"       
+          curl  -H "Content-Type: application/json" -d '{"repositoryURL":"https://github.com/matholiveira91/hsk.git","repositoryBranch":"main"}' "$HUSKY_URL"       
