@@ -23,4 +23,4 @@ jobs:
           
       
         run: |
-          curl  -H "Accept:application/json" -d '{"repositoryURL":"https://github.com/matholiveira91/hsk.git","repositoryBranch":"main"}' "${{secrets.HUSKY_URL}}"
+          curl  -H "Accept:application/json" -d '{"repositoryURL":"https://github.com/matholiveira91/hsk.git","repositoryBranch":"main"}' ${{secrets.HUSKY_URL}}
