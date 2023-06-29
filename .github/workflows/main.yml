@@ -18,9 +18,9 @@ jobs:
 
       - name: Run huskyCI
       
-        env:
-          HUSKY_URL: ${{secrets.HUSKY_URL}}                    
+        #env:
+         # HUSKY_URL: ${{secrets.HUSKY_URL}}                    
           
       
         run: |
-          curl  -H "Accept:application/json" -d '{"repositoryURL":"https://github.com/matholiveira91/hsk.git","repositoryBranch":"main"}' "$HUSKY_URL"
+          curl  -H "Accept:application/json" -d '{"repositoryURL":"https://github.com/matholiveira91/hsk.git","repositoryBranch":"main"}' "${{secrets.HUSKY_URL}}"
