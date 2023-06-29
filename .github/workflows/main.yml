@@ -19,7 +19,7 @@ jobs:
       - name: Run huskyCI
       
         env:
-          HUSKY_URL: ${{HUSKY_URL}}                    
+          HUSKY_URL: ${{secrets.HUSKY_URL}}                    
           
       
         run: |
