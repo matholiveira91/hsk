@@ -28,5 +28,11 @@ jobs:
           sleep 30s
           request_id=$(echo "$headers" | grep 'X-Request-Id:' | awk '{print $2}')
           combined_url="${{ secrets.HUSKY_URL }}/$request_id"
-          response=$(curl -s "$combined_url")
-          #echo "$response"
+          response=$(curl -s "$combined_url" 2>&1)
+          exit_code=$?
+          if [ $exit_code -ne 0 ]; then
+              echo "Failed to retrieve the content from $combined_url"
+              echo "Error: $response"
+          else
+              echo "$response"
+          fi
