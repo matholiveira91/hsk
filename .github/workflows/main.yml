@@ -18,6 +18,7 @@ jobs:
 
       - name: Run huskyCI
       
+      
         #env:
          # HUSKY_URL: ${{secrets.HUSKY_URL}}                    
           
@@ -28,5 +29,12 @@ jobs:
           sleep 30s
           #request_id=$(echo "$headers" | grep 'X-Request-Id:' | awk '{print $2}')
           echo "request_id=$(echo "$headers" | grep 'X-Request-Id:' | awk '{print $2}')" >> "$GITHUB_ENV"
-           #curl  "${{ secrets.HUSKY_URL }}/${{ env.request_id }}"
-           echo "${{ secrets.HUSKY_URL }}/${{ env.request_id }}"
+          
+          
+           
+      - name: Resultado Analise
+        env:
+          req_id: ${{ env.request_id }}
+        run: | 
+           curl  "${{ secrets.HUSKY_URL }}/${{ env.request_id }}"
+           #echo "${{ secrets.HUSKY_URL }}/${{ env.request_id }}"
