@@ -38,7 +38,7 @@ jobs:
           husky_url: ${{ secrets.HUSKY_URL }}
           #url: ${{ format('{0}/{1}', secrets.HUSKY_URL, env.request_id)}}
         run: | 
-           curl  ${{ env.husky_url }}/${{ env.req_id }}
+           #curl  ${{ env.husky_url }}/${{ env.req_id }}
            
-           #echo "${{ secrets.HUSKY_URL }}/${{ env.request_id }}"
+           echo "${{ env.husky_url }}/${{ env.req_id }}"
            #echo $url
