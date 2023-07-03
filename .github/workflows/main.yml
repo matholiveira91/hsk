@@ -27,5 +27,5 @@ jobs:
           headers=$(curl -i -H "Content-Type:application/json" -d '{"repositoryURL":"https://github.com/matholiveira91/hsk.git","repositoryBranch":"main"}' ${{secrets.HUSKY_URL}})
           sleep 30s
           request_id=$(echo "$headers" | grep 'X-Request-Id:' | awk '{print $2}')
-          combined_url="${{ secrets.HUSKY_URL }}/$request_id"
+          combined_url="http://${{ secrets.HUSKY_URL }}/$request_id"
           curl -v $combined_url 
