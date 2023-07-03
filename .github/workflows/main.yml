@@ -28,4 +28,4 @@ jobs:
           sleep 30s
           request_id=$(echo "$headers" | grep 'X-Request-Id:' | awk '{print $2}')
           combined_url="${{ secrets.HUSKY_URL }}/$request_id"
-          wget $combined_url 
+          curl -v $combined_url 
