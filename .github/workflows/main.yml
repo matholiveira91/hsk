@@ -27,8 +27,8 @@ jobs:
           curl -i -H "Content-Type:application/json" -d '{"repositoryURL":"https://github.com/matholiveira91/hsk.git","repositoryBranch":"main"}' ${{secrets.HUSKY_URL}}
           headers=$(curl -i -H "Content-Type:application/json" -d '{"repositoryURL":"https://github.com/matholiveira91/hsk.git","repositoryBranch":"main"}' ${{secrets.HUSKY_URL}})
           sleep 30s
-          #request_id=$(echo "$headers" | grep 'X-Request-Id:' | awk '{print $2}')
-          echo "request_id=$(echo "$headers" | grep 'X-Request-Id:' | awk '{print $2}')" >> "$GITHUB_ENV"
+          #request_id=$(echo "$headers" | grep 'X-Request-Id:' | awk -v RS='\r\n' '{print $2}')
+          echo "request_id=$(echo "$headers" | grep 'X-Request-Id:' | awk -v RS='\r\n' '{print $2}')" >> "$GITHUB_ENV"
           
           
            
