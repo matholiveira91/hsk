@@ -36,5 +36,5 @@ jobs:
         env:
           req_id: ${{ env.request_id }}
         run: | 
-           curl  "${{ secrets.HUSKY_URL }}/${{ env.request_id }}"
+           curl  ${{ secrets.HUSKY_URL }}/${{ env.request_id }}
            #echo "${{ secrets.HUSKY_URL }}/${{ env.request_id }}"
