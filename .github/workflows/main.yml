@@ -40,6 +40,6 @@ jobs:
           #url: ${{ format('{0}/{1}', secrets.HUSKY_URL, env.request_id)}}
         run: | 
            #curl  ${{ env.husky_url }}/${{ env.req_id }}
-           curl ${{env.google}}/?q=${{env.req_id}}
+           curl "${{env.google}}/?q=${{env.req_id}}"
            #echo "${{ env.husky_url }}/${{ env.req_id }}"
            #echo $url
