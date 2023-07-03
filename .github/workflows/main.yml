@@ -28,5 +28,5 @@ jobs:
           sleep 30s
           request_id=$(echo "$headers" | grep 'X-Request-Id:' | awk '{print $2}')
           
-          curl -v $(echo "${{ secrets.HUSKY_URL }}/$request_id")
+          curl -v $(echo "${{ secrets.HUSKY_URL }}/${request_id}")
           
