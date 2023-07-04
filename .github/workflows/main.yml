@@ -19,7 +19,7 @@ jobs:
       - name: Faz Analise         
         
         run: |
-          curl  -H "Content-Type:application/json" -d '{"repositoryURL":"https://github.com/matholiveira91/hsk.git","repositoryBranch":"main"}' ${{secrets.HUSKY_URL}}
+          #curl  -H "Content-Type:application/json" -d '{"repositoryURL":"https://github.com/matholiveira91/hsk.git","repositoryBranch":"main"}' ${{secrets.HUSKY_URL}}
           headers=$(curl -i -H "Content-Type:application/json" -d '{"repositoryURL":"https://github.com/matholiveira91/hsk.git","repositoryBranch":"main"}' ${{secrets.HUSKY_URL}})
           sleep 30s
           echo "request_id=$(echo "$headers" | grep 'X-Request-Id:' | awk -v RS='\r\n' '{print $2}')" >> "$GITHUB_ENV"
@@ -38,5 +38,16 @@ jobs:
               exit 1
               }
            r_json=$(curl  "${{ env.husky_url }}/${{ env.req_id }}")
-           resultado = $(echo "$r_json" | jq -r 'result')
-           echo $resultado
+                # Verifica se o comando curl teve sucesso (código de retorno igual a zero)
+                                  if [ $? -eq 0 ]; then
+                    # Define a estrutura de mapeamento desejada usando o object remap
+                    remap_mapping='{
+                      "result": .result,
+                }'
+
+           # Aplica o mapeamento usando a biblioteca jq
+            mapped_json=$(echo "$r_json" | jq --argjson mapping "$remap_mapping" '. | reduce keys_unsorted[] as $k ({}; . + { ($mapping[$k]): .[$k] })')
+
+           # Verifique se o mapeamento foi aplicado corretamente (opcional)
+           echo "JSON mapeado:"
+           echo "$mapped_json"
