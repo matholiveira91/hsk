@@ -38,16 +38,7 @@ jobs:
               exit 1
               }
            r_json=$(curl  "${{ env.husky_url }}/${{ env.req_id }}")
-                # Verifica se o comando curl teve sucesso (código de retorno igual a zero)
-                                  if [ $? -eq 0 ]; then
-                    # Define a estrutura de mapeamento desejada usando o object remap
-                    remap_mapping='{
-                      "result": .result,
-                }'
+           result_value=$(echo "$r_json" | jq -r '.result')
+           echo $result_value
 
-           # Aplica o mapeamento usando a biblioteca jq
-            mapped_json=$(echo "$r_json" | jq --argjson mapping "$remap_mapping" '. | reduce keys_unsorted[] as $k ({}; . + { ($mapping[$k]): .[$k] })')
-
-           # Verifique se o mapeamento foi aplicado corretamente (opcional)
-           echo "JSON mapeado:"
-           echo "$mapped_json"
+        
