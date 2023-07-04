@@ -40,7 +40,6 @@ jobs:
                 gh pr close ${{env.PR}} -c 'parece que você esta tentando mergar um codigo vulneravel por favor revise-o '
               uses: tibdex/github-commit-status-action@v3
               with:
-                token: ${{ secrets.GITHUB_TOKEN }}
                 state: failure
                 description: Você commitou um codigo vulneravel, por favor revise-o e commite novamente.
 
