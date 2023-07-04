@@ -39,9 +39,9 @@ jobs:
               }
            r_json=$(curl  "${{ env.husky_url }}/${{ env.req_id }}")
            result_value=$(echo "$r_json" | jq -r '.result')
-           if [ $result_value == "failed"];do{
+           if [ $result_value == "failed"]; then
               stop_pipeline()
-           
-           }
+           fi
+         
 
         
