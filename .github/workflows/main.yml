@@ -23,16 +23,14 @@ jobs:
           headers=$(curl -i -H "Content-Type:application/json" -d '{"repositoryURL":"https://github.com/matholiveira91/hsk.git","repositoryBranch":"main"}' ${{secrets.HUSKY_URL}})
           sleep 30s
           echo "request_id=$(echo "$headers" | grep 'X-Request-Id:' | awk -v RS='\r\n' '{print $2}')" >> "$GITHUB_ENV"
-          
-          
-           
+                     
       - name: Resultado Analise
         env:
           req_id: ${{ env.request_id }}
           husky_url: ${{ secrets.HUSKY_URL }}
           
         run: | 
-           curl  "${{ env.husky_url }}/${{ env.req_id }}"
+           curl  "${{ env.husky_url }}/${{ env.req_id }}" | json_pp
            stop_pipeline(){
               echo "foram encontradas vulnerabilidades que podem comprometer a aplicação, por favor corrija e commite novamente"
               exit 1
@@ -44,7 +42,4 @@ jobs:
            else
             echo "Parabens seu codigo aparente esta limpo"
             exit 0
-           fi
-         
-
-        
+           fi    
