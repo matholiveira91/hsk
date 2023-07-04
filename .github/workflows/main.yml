@@ -35,9 +35,10 @@ jobs:
            
            stop_pipeline(){
               echo "foram encontradas vulnerabilidades que podem comprometer a aplicação, por favor corrija e commite novamente"             
-              if: github.event.pull_request
+              if [ github.event.pull_request ]; then
                 gh pr edit ${{env.PR}} --add-label 'invalid'
                 gh pr close ${{env.PR}} -c 'parece que você esta tentando mergar um codigo vulneravel por favor revise-o '
+              fi
               uses: tibdex/github-commit-status-action@v3
               with:
                 token: ${{ secrets.GITHUB_TOKEN }}
