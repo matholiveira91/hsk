@@ -41,6 +41,9 @@ jobs:
            result_value=$(echo "$r_json" | jq -r '.result')
            if [ $result_value == "failed" ]; then
               stop_pipeline
+           else
+            echo "Parabens seu codigo aparente esta limpo"
+            exit 0
            fi
          
 
