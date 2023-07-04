@@ -38,5 +38,5 @@ jobs:
               exit 1
               }
            r_json=$(curl  "${{ env.husky_url }}/${{ env.req_id }}")
-           resultado = $(echo "$r_json" | jq -r '.result')
+           resultado = $(echo "$r_json" | jq -r 'result')
            echo $resultado
