@@ -42,7 +42,7 @@ jobs:
                 PR_NUMBER=${GITHUB_REF#refs/pull/}
                 PR_NUMBER=${PR_NUMBER%/merge}
                 gh pr close $PR_NUMBER -R $GITHUB_REPOSITORY  $GITHUB_TOKEN -c 'parece que você esta tentando mergar um codigo vulneravel por favor revise-o '
-                gh pr edit ${{env.PR}} --add-label 'invalid'
+                #gh pr edit ${{env.PR}} --add-label 'invalid'
               fi
               uses: tibdex/github-commit-status-action@v3
               with:
