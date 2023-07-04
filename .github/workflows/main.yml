@@ -16,18 +16,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Run huskyCI
-      
-      
-        #env:
-         # HUSKY_URL: ${{secrets.HUSKY_URL}}                    
-          
-      
+      - name: Faz Analise         
+        
         run: |
-          curl -i -H "Content-Type:application/json" -d '{"repositoryURL":"https://github.com/matholiveira91/hsk.git","repositoryBranch":"main"}' ${{secrets.HUSKY_URL}}
+          curl  -H "Content-Type:application/json" -d '{"repositoryURL":"https://github.com/matholiveira91/hsk.git","repositoryBranch":"main"}' ${{secrets.HUSKY_URL}}
           headers=$(curl -i -H "Content-Type:application/json" -d '{"repositoryURL":"https://github.com/matholiveira91/hsk.git","repositoryBranch":"main"}' ${{secrets.HUSKY_URL}})
           sleep 30s
-          #request_id=$(echo "$headers" | grep 'X-Request-Id:' | awk -v RS='\r\n' '{print $2}')
           echo "request_id=$(echo "$headers" | grep 'X-Request-Id:' | awk -v RS='\r\n' '{print $2}')" >> "$GITHUB_ENV"
           
           
@@ -37,9 +31,12 @@ jobs:
           req_id: ${{ env.request_id }}
           husky_url: ${{ secrets.HUSKY_URL }}
           
-          #url: ${{ format('{0}/{1}', secrets.HUSKY_URL, env.request_id)}}
         run: | 
            curl  "${{ env.husky_url }}/${{ env.req_id }}"
-           
-           #echo "${{ env.husky_url }}/${{ env.req_id }}"
-           #echo $url
+           stop_pipeline(){
+              echo "foram encontradas vulnerabilidades que podem comprometer a aplicação, por favor corrija e commite novamente"
+              exit 1
+              }
+           r_json=$(curl  "${{ env.husky_url }}/${{ env.req_id }}")
+           resultado = $(echo "$r_json" | jq -r '.failed')
+           echo $resultado
