@@ -28,16 +28,28 @@ jobs:
         env:
           req_id: ${{ env.request_id }}
           husky_url: ${{ secrets.HUSKY_URL }}
+          PR: ${{ github.event.pull_request.html_url }}
           
         run: | 
            curl  "${{ env.husky_url }}/${{ env.req_id }}" | json_pp
+           
            stop_pipeline(){
-              echo "foram encontradas vulnerabilidades que podem comprometer a aplicação, por favor corrija e commite novamente"
+              echo "foram encontradas vulnerabilidades que podem comprometer a aplicação, por favor corrija e commite novamente"             
+              if: github.event.pull_request
+                gh pr edit ${{env.PR}} --add-label 'invalid'
+                gh pr close ${{env.PR}} -c 'parece que você esta tentando mergar um codigo vulneravel por favor revise-o '
+              uses: tibdex/github-commit-status-action@v3
+              with:
+                token: ${{ secrets.GITHUB_TOKEN }}
+                state: failure
+                description: Você commitou um codigo vulneravel, por favor revise-o e commite novamente.
+
               exit 1
               }
            r_json=$(curl  "${{ env.husky_url }}/${{ env.req_id }}")
            result_value=$(echo "$r_json" | jq -r '.result')
            if [ $result_value == "failed" ]; then
+                       
               stop_pipeline
            else
             echo "Parabens seu codigo aparente esta limpo"
