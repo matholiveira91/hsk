@@ -41,7 +41,6 @@ jobs:
               fi
               uses: tibdex/github-commit-status-action@v3
               with:
-                token: ${{ secrets.GITHUB_TOKEN }}
                 state: failure
                 description: Você commitou um codigo vulneravel, por favor revise-o e commite novamente.
 
