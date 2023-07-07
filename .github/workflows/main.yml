@@ -54,11 +54,6 @@ jobs:
                 gh pr close $PR_NUMBER -R $GITHUB_REPOSITORY -c 'parece que você esta tentando mergar um codigo vulneravel por favor revise-o '
                 gh pr edit ${{env.PR}} --add-label 'invalid'
               fi
-              uses: tibdex/github-commit-status-action@v3
-              with:
-                state: failure
-                description: Você commitou um codigo vulneravel, por favor revise-o e commite novamente.
-
               exit 1
               }
            r_json=$(curl  "${{ env.husky_url }}/${{ env.req_id }}")
