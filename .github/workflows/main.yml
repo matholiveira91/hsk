@@ -45,7 +45,7 @@ jobs:
                   # Obter o hash do commit mais recente
                   COMMIT_HASH=$(git rev-parse HEAD)
               fi
-              git config --global user.name "hsk"
+              
               git revert --no-edit $COMMIT_HASH
               if [ github.event.pull_request ]; then
                 # Extrair o número do pull request da variável GITHUB_REF
